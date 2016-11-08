@@ -1,0 +1,71 @@
+import time, random #time module is required for timing sorts, random module is required for generating the unsorted lists.
+
+smallList = [10,3,9,2,8,4,6,7,5] #a small list for students to check that the sorting alorithm is working
+numbersList = [] #used to store a list of 5000 numbers between 1 and 100
+lettersList = [] #used to store a list of 5000 uppercase letters A..Z
+wordsList = [] #used to store a list of 10000 random words from an english dictionary
+
+#this procedure will create data for numbersList
+def createNumbersList():
+	for i in range(5000):
+		numbersList.append(random.randint(1,100))
+
+#this procedure will create data for lettersList
+def createLettersList():
+	letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+	for i in range(5000):
+		lettersList.append(letters[random.randint(0,len(letters)-1)])
+
+#this procedure will create data for wordsList
+def createWordsList():
+	f = open('wordsEn.txt', 'r+')
+	dictionaryList = []
+	for line in f:
+		dictionaryList.append(line[0:-1])
+	random.shuffle(dictionaryList)
+	for index in range(10000):
+		wordsList.append(dictionaryList[index])
+
+def BubbleSort(aList):
+	exchanges = True
+	passnum = len(aList) - 1
+	while passnum > 0 and exchanges == True:
+		exchanges = False
+		for index in range(0,passnum):
+			if aList[index] > aList[index+1]:
+				exchanges = True
+				temp = aList[index]
+				aList[index] = aList[index+1]
+				aList[index+1] = temp
+			#print(aList) #to see the resulting list after every comparison in the bubble sort
+		passnum = passnum - 1
+		#print(aList) #to see the resulting list after each pass of the bubble sort
+
+
+def testBubbleSort():
+	#code to carry out a timed sort for numbersList and print out the time
+	startTime = time.time() #store the start time
+	BubbleSort(numbersList) #bubble sort the numbersList
+	timeTaken = time.time() - startTime #calculate the time taken using the current time and start time
+	print("Time taken for bubble sort on numbersList (5000 numbers 1..100) is %.2f seconds"%timeTaken)
+
+	#code to carry out a timed sort for lettersList and print out the time
+	startTime = time.time() #store the start time
+	BubbleSort(lettersList) #bubble sort the numbersList
+	timeTaken = time.time() - startTime #calculate the time taken using the current time and start time
+	print("Time taken for bubble sort on lettersList (5000 letters) is %.2f seconds"%timeTaken)
+
+	#code to carry out a timed sort for wordsList and print out the time
+	startTime = time.time() #store the start time
+	BubbleSort(wordsList) #bubble sort the numbersList
+	timeTaken = time.time() - startTime #calculate the time taken using the current time and start time
+	print("Time taken for bubble sort on wordsList (10,000 words) is %.2f seconds"%timeTaken)
+
+
+#code to call procedures to create the unsorted lists for testing/timing
+createNumbersList()
+#createLettersList()
+#createWordsList()
+
+#code to call the procedure to test the bubble sort algorithm
+testBubbleSort()
