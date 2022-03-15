@@ -120,5 +120,5 @@ if hp <= 0:
     print("Your hero is dead")
     
 else:
-    print ("You are doing you have survived the terrible tunnel of doom!!!!")
+    print ("You have survived the terrible tunnel of doom!!!!")
   
